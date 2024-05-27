@@ -13,10 +13,14 @@ export default function setReferences(client) {
     try {
       const preference = await new Preference(client).create({ body: peticion });
       console.log('preference', preference);
-      res.status(200).send(preference);
+      if (preference.id && preference.status) {
+        res.status(200).json(preference);
+      } else {
+        res.status(500).json(preference);
+      }
     } catch (error) {
       console.error('error', error);
-      res.json(error);
+      res.status(500).json(error);
     }
   });
 

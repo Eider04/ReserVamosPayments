@@ -24,15 +24,19 @@ export const setPayment = (client) => {
             payment.create({ body: peticion })
                 .then((response) => {
                     console.log('responsepago', response);
-                    res.json(response);
+                    if (response.id && response.status) {
+                        res.json(response);
+                    } else {
+                        res.status(500).json(response);
+                    }
                 })
                 .catch((error) => {
                     console.error('error', error);
-                    res.json(error);
+                    res.status(500).json(error);
                 });
 
         } catch (error) {
-            res.json(error);
+            res.status(500).json(error);
         }
     });
 
@@ -53,15 +57,19 @@ export const getPayment = (client) => {
             payment.get({ id: peticion })
                 .then((response) => {
                     console.log('get responsepago', response);
-                    res.json(response);
+                    if (response.id && response.status) {
+                        res.json(response);
+                    } else {
+                        res.status(500).json(response);
+                    }
                 })
                 .catch((error) => {
                     console.error('get pago error', error);
-                    res.json(error);
+                    res.status(500).json(error);
                 });
 
         } catch (error) {
-            res.json(error);
+            res.status(500).json(error);
         }
     });
 
