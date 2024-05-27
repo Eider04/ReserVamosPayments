@@ -4,20 +4,22 @@ import { Preference, MercadoPagoConfig } from "mercadopago";
 
 
 /* GET home page. */
-export default function guardarReferencia(client) {
-  references.post('/', async (req, res, next)=> {
-    console.log('Igresosssss*********');
-      
+export default function setReferences(client) {
+  references.post('/', async (req, res, next) => {
+    let peticion = req.body;
+    console.log('Igresosssss*********', peticion);
+
+
     try {
-        const preference = await new Preference(client).create({ req });
-        console.log('preference', preference);  
-        res.status(200).send(preference);
+      const preference = await new Preference(client).create({ body: peticion });
+      console.log('preference', preference);
+      res.status(200).send(preference);
     } catch (error) {
-        console.error('error', error);      
-        res.json(error);
+      console.error('error', error);
+      res.json(error);
     }
   });
-  
+
   return references;
 }
 
