@@ -7,7 +7,7 @@ import { Preference, MercadoPagoConfig } from "mercadopago";
 export default function setReferences(client) {
   references.post('/', async (req, res, next) => {
     let peticion = req.body;
-    console.log('Igresosssss*********', peticion);
+    console.log('Request references', peticion);
 
 
     try {

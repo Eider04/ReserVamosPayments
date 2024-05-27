@@ -14,8 +14,11 @@ export default function setPayment(client) {
                         },
                     };
              */
-            const payment = new Payment(client);
+
             let peticion = req.body;
+            console.log('Request pago', peticion);
+
+            const payment = new Payment(client);
 
             payment.create({ body: peticion })
                 .then((response) => {

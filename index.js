@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-const client = new MercadoPagoConfig({ accessToken: process.env.ACCESS_TOKEN, options: { timeout: 5000, idempotencyKey: 'abc' } });
+const client = new MercadoPagoConfig({ accessToken: process.env.ACCESS_TOKEN });
 
 app.use('/create_preference', setReferences(client));
 app.use('/create_payment', setPayment(client));
