@@ -6,7 +6,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import setReferences from "./routes/references.js";
-import setPayment from "./routes/payment.js";
+import { setPayment, getPayment } from "./routes/payment.js";
 
 
 
@@ -24,6 +24,7 @@ const client = new MercadoPagoConfig({ accessToken: process.env.ACCESS_TOKEN });
 
 app.use('/create_preference', setReferences(client));
 app.use('/create_payment', setPayment(client));
+app.use('/get_payment', getPayment(client));
 
 
 app.get("/", async (req, res) => {

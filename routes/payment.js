@@ -1,9 +1,10 @@
 import express from "express";
-var payment = express.Router();
+
 import { Payment } from "mercadopago";
 
-export default function setPayment(client) {
-    payment.post('/', function (req, res, next) {
+export const setPayment = (client) => {
+    var payment = express.Router();
+    payment.post('/', (req, res, next) => {
         try {
             /*         const body = {
                         transaction_amount: 12.34,
@@ -27,6 +28,35 @@ export default function setPayment(client) {
                 })
                 .catch((error) => {
                     console.error('error', error);
+                    res.json(error);
+                });
+
+        } catch (error) {
+            res.json(error);
+        }
+    });
+
+    return payment;
+}
+
+
+
+export const getPayment = (client) => {
+    var payment = express.Router();
+    payment.post('/', (req, res, next) => {
+        try {
+            let peticion = req.body.id;
+            console.log('Request Getpago', peticion);
+
+            const payment = new Payment(client);
+
+            payment.get({ id: peticion })
+                .then((response) => {
+                    console.log('get responsepago', response);
+                    res.json(response);
+                })
+                .catch((error) => {
+                    console.error('get pago error', error);
                     res.json(error);
                 });
 
