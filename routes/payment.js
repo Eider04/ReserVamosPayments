@@ -1,6 +1,6 @@
 import express from "express";
 
-import { Payment } from "mercadopago";
+import { Payment, PaymentMethod } from "mercadopago";
 
 export const setPayment = (client) => {
     var payment = express.Router();
@@ -65,6 +65,36 @@ export const getPayment = (client) => {
                 })
                 .catch((error) => {
                     console.error('get pago error', error);
+                    res.status(500).json(error);
+                });
+
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    });
+
+    return payment;
+}
+
+
+
+export const getMethodPayment = (client) => {
+    var payment = express.Router();
+    payment.post('/', (req, res, next) => {
+        try {
+            let peticion = req.body.id;
+            console.log('Request getMethodPayment', peticion);
+
+            const paymentMethod = new PaymentMethod(client);
+
+
+            paymentMethod.get({ id: peticion })
+                .then((response) => {
+                    console.log('getMethodPayment responsepago', response);
+                    res.status(200).json(response);
+                })
+                .catch((error) => {
+                    console.error('getMethodPayment pago error', error);
                     res.status(500).json(error);
                 });
 
