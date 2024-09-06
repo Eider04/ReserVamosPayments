@@ -13,7 +13,7 @@ export const setPayment = (client) => {
                         payer: {
                             email: '<EMAIL>'
                         },
-                    };
+                    }; 
              */
 
             let peticion = req.body;
